@@ -1,11 +1,13 @@
 const express = require('express')
 const app = express()
-const gemini_route = require('./routes/gemini')
 require('dotenv').config()
+const gemini_route = require('./routes/geminiRoute.js')
+const elevenlabs_route = require('./routes/elevenlabsRoute.js')
 
 app.use(express.json())
 
 app.use('/gemini', gemini_route)
+app.use('/elevenlabs', elevenlabs_route)
 
 app.get('/', (req,res) => {
     res.status(200).json({msg: "Hello World"})
