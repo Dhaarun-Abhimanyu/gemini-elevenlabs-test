@@ -1,7 +1,7 @@
 const { ElevenLabsClient, play} = require('elevenlabs')
 require('dotenv').config()
 const {
-    generateContent,
+    generateContentReturn,
 } = require('../controllers/geminiController.js')
 
 const elevenlabs = new ElevenLabsClient({
@@ -10,11 +10,11 @@ const elevenlabs = new ElevenLabsClient({
 
 const generateGeminiAudio = async(req,res) => {
     try{
-        const text = await generateContent(req,res)
+        const text = await generateContentReturn(req,res)
         console.log({gemini_text: text})
         const audio = await elevenlabs.generate({
             voice: "Rachel",
-            text: "hello world",
+            text: text,
             model_id: "eleven_multilingual_v2"
         })
         await play(audio)

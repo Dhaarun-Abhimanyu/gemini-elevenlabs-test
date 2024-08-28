@@ -24,13 +24,26 @@ const generateContent = async(req,res) => {
         const result = await model.generateContent(prompt)
         const response = await result.response
         const text = await response.text()
-        return text
+        res.status(200).send({msg: text})
     }catch(error){
         console.log({msg: error.message})
         res.status(400).send({msg: error.message})
     }
 }
+const generateContentReturn = async(req,res) => {
+  try{
+      const prompt = 'In 5 words, tell any good quote you can think of'
+      const result = await model.generateContent(prompt)
+      const response = await result.response
+      const text = await response.text()
+      return text;
+  }catch(error){
+      console.log({msg: error.message})
+      res.status(400).send({msg: error.message})
+  }
+}
 
 module.exports = {
   generateContent,
+  generateContentReturn,
 }
