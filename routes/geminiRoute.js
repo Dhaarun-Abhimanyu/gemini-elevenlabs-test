@@ -5,6 +5,6 @@ const {
 
 const router = express.Router()
 
-router.get('/', generateContent)
+router.post('/', generateContent)
 
 module.exports = router

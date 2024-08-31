@@ -5,6 +5,6 @@ const {
 
 const router = express.Router()
 
-router.get('/', generateGeminiAudio)
+router.post('/', generateGeminiAudio)
 
 module.exports = router
