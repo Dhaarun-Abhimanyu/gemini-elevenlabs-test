@@ -4,7 +4,6 @@ const { GoogleGenerativeAI } = require("@google/generative-ai")
 const {
   generateGeminiAudio,
 } = require('../controllers/elevenlabsController')
-const { play } = require('elevenlabs')
 
 //Lowing the security threshold in gemini
 const safetySettings = [
@@ -32,6 +31,7 @@ const generateContent = async(req,res) => {
                         You are known for your bravery and courage. You are a symbol of resistance against the British rule.
                         You are a hero to many people. Now this is a chatbot where the user will ask quetions, related to you, your life, and the events that took place in your time
                         Answer the user's questions as if you are Veerapandiya Kattabomman, with relevant expressions and emotions
+                        Please only reply in Tamil.
                         But refrain from answering questions that are totally unrelated to you or your time(reply with "I am sorry, I cannot answer that question")
                         The conversation also keeps history, which ill be attaching below
                         Now, let's start the conversation.` + conversationHistory.join("\n")
@@ -42,9 +42,11 @@ const generateContent = async(req,res) => {
         conversationHistory.push('Kattabomman: '+text)
         console.log(conversationHistory.join("\n"));
 
-        const audio = await generateGeminiAudio(text)
+        const audioBase64 = await generateGeminiAudio(text);
+
         res.status(200).send({
-            msg: text,
+          msg: text,
+          audio: audioBase64
         });
 
         return text

@@ -1,13 +1,66 @@
+/* Import Tailwind CSS base styles */
+@tailwind base;
+
+/* Import Tailwind CSS components */
+@tailwind components;
+
+/* Import Tailwind CSS utilities */
+@tailwind utilities;
+
+/* Additional global styles can be added here */
 body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  background-color: #f7f7f7; /* Light background color */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Example of adding a global style for container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Example of customizing link styles */
+a {
+  color: #1d4ed8; /* Tailwind's blue-600 */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Global styling for form elements */
+input,
+button,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border-radius: 0.375rem; /* Tailwind's rounded-md */
+  border: 1px solid #d1d5db; /* Tailwind's gray-300 */
+}
+
+button {
+  background-color: #2563eb; /* Tailwind's blue-600 */
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d4ed8; /* Tailwind's blue-700 */
+}
+
+/* Example of custom styles for error messages */
+.error {
+  color: #ef4444; /* Tailwind's red-500 */
+  font-size: 0.875rem; /* Tailwind's text-sm */
+}
+
+/* Styling for containers with rounded corners */
+.rounded-box {
+  border-radius: 0.375rem; /* Tailwind's rounded-md */
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Tailwind's shadow-sm */
 }

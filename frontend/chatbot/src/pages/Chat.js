@@ -1,11 +1,58 @@
-import { ChatWindow } from '../components/ChatWindow'
-import { Inputbox } from '../components/Inputbox'
+import React, { useState } from 'react';
+import ChatWindow from '../components/ChatWindow';
+import InputBox from '../components/InputBox';
 
 const Chat = () => {
+    const [messages, setMessages] = useState([]);
+
+    const addMessage = (text, sender, audio = null) => {
+        setMessages(prevMessages => [...prevMessages, { text, sender, audio }]);
+    };
+
+    const handleSendMessage = async (message) => {
+        // Add the user's message to the chat
+        addMessage(message, 'User');
+    
+        try {
+            // Send the message to the backend and get the bot's response
+            const response = await fetch('/gemini', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: message }),
+            });
+            const json = await response.json();
+
+            console.log('Server response:', json);  // Debugging line
+
+            if (response.ok) {
+                // Add the bot's response and audio to the chat
+                addMessage(json.msg, 'Kattabomman', json.audio);
+
+                // Play the audio if it exists
+                if (json.audio) {
+                    const audio = new Audio(`data:audio/wav;base64,${json.audio}`);
+                    audio.play().catch(error => console.error('Audio playback error:', error));
+                }
+            } else {
+                console.error(json.error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     return (
-        <div className="chatpage">
-            <ChatWindow />
-            <Inputbox />
+        <div className="chatpage flex flex-col items-center justify-center h-screen bg-gray-100">
+            <div className="chat-window bg-white shadow-md p-4 rounded-lg w-full max-w-3xl overflow-y-auto flex-grow">
+                <ChatWindow messages={messages} />
+            </div>
+            <div className="inputbox mt-4 w-full max-w-3xl">
+                <InputBox onSend={handleSendMessage} />
+            </div>
         </div>
-    )
-}
+    );
+};
+
+export default Chat;
