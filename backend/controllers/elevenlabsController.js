@@ -11,7 +11,7 @@ const generateGeminiAudio = async (generated_text) => {
             voice: "Arnold",
             text: generated_text,
             model_id: "eleven_multilingual_v2",
-            stream: true // Ensure you are using streaming
+            stream: true
         });
 
         const chunks = [];

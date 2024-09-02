@@ -64,3 +64,23 @@ button:hover {
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Tailwind's shadow-sm */
 }
+.avatar {
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 100; /* Ensure it appears above other content */
+}
+
+.avatar.visible {
+  opacity: 1;
+}
+
+.avatar.hidden {
+  opacity: 0;
+}
+
+.avatar-image {
+  width: 150px; /* Adjust size */
+  height: auto;
+}

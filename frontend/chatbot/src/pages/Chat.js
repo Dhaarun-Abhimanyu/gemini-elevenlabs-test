@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import ChatWindow from '../components/ChatWindow';
 import InputBox from '../components/InputBox';
+import Avatar from '../components/Avatar';  // Import the Avatar component
 
 const Chat = () => {
     const [messages, setMessages] = useState([]);
+    const [botResponded, setBotResponded] = useState(false); // State to track bot response
 
     const addMessage = (text, sender, audio = null) => {
         setMessages(prevMessages => [...prevMessages, { text, sender, audio }]);
     };
 
     const handleSendMessage = async (message) => {
-        // Add the user's message to the chat
         addMessage(message, 'User');
-    
+        setBotResponded(false); // Reset the avatar visibility when the user sends a message
+
         try {
-            // Send the message to the backend and get the bot's response
             const response = await fetch('/gemini', {
                 method: 'POST',
                 headers: {
@@ -24,11 +25,12 @@ const Chat = () => {
             });
             const json = await response.json();
 
-            console.log('Server response:', json);  // Debugging line
-
             if (response.ok) {
-                // Add the bot's response and audio to the chat
                 addMessage(json.msg, 'Kattabomman', json.audio);
+                setBotResponded(true); // Show the avatar when the bot responds
+                setTimeout(() => {
+                    setBotResponded(false);
+                }, 5000);
 
                 // Play the audio if it exists
                 if (json.audio) {
@@ -44,15 +46,19 @@ const Chat = () => {
     };
 
     return (
-        <div className="chatpage flex flex-col items-center justify-center h-screen bg-gray-100">
+        <div className="chatpage relative flex flex-col items-center justify-center h-screen bg-gray-100">
             <div className="chat-window bg-white shadow-md p-4 rounded-lg w-full max-w-3xl overflow-y-auto flex-grow">
                 <ChatWindow messages={messages} />
             </div>
             <div className="inputbox mt-4 w-full max-w-3xl">
                 <InputBox onSend={handleSendMessage} />
             </div>
+            {/* Conditionally render the Avatar component */}
+            {botResponded && <Avatar />}
         </div>
     );
 };
+
+
 
 export default Chat;
