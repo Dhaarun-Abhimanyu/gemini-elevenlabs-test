@@ -1,7 +1,8 @@
 import React from 'react';
-import Message from './Message';
+import Message from './Message.jsx';
 
 const ChatWindow = ({ messages }) => {
+    console.log(messages);
     return (
         <div className="chat-window bg-gray-50 p-4 rounded-lg h-96 overflow-y-auto">
             {messages.map((msg, index) => (

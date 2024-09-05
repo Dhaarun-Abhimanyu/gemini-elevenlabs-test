@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ChatWindow from '../components/ChatWindow';
-import InputBox from '../components/InputBox';
-import Avatar from '../components/Avatar';  // Import the Avatar component
+import ChatWindow from '../components/ChatWindow.jsx';
+import InputBox from '../components/InputBox.jsx';
+import Avatar from '../components/Avatar.jsx';  // Import the Avatar component
 
 const Chat = () => {
     const [messages, setMessages] = useState([]);
