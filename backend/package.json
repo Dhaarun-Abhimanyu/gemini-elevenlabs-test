@@ -7,6 +7,8 @@
     "nodemon": "^3.1.4"
   },
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && nodemon server.js",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && node server.js",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && webpack"
   }
 }

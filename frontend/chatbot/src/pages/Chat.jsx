@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ChatWindow from '../components/ChatWindow';
 import InputBox from '../components/InputBox';
+import AudioIndicator from '../components/AudioIndicator'; // Import the AudioIndicator component
 
 const Chat = () => {
     const [messages, setMessages] = useState([]);
+    const [isPlaying, setIsPlaying] = useState(false); // State to track audio playing status
 
     const addMessage = (text, sender, audio = null) => {
         setMessages(prevMessages => [...prevMessages, { text, sender, audio }]);
@@ -12,7 +14,7 @@ const Chat = () => {
     const handleSendMessage = async (message) => {
         // Add the user's message to the chat
         addMessage(message, 'User');
-    
+
         try {
             // Send the message to the backend and get the bot's response
             const response = await fetch('/gemini', {
@@ -24,7 +26,7 @@ const Chat = () => {
             });
             const json = await response.json();
 
-            console.log('Server response:', json);  // Debugging line
+            console.log('Server response:', json); // Debugging line
 
             if (response.ok) {
                 // Add the bot's response and audio to the chat
@@ -33,7 +35,16 @@ const Chat = () => {
                 // Play the audio if it exists
                 if (json.audio) {
                     const audio = new Audio(`data:audio/wav;base64,${json.audio}`);
-                    audio.play().catch(error => console.error('Audio playback error:', error));
+                    setIsPlaying(true); // Show the image when audio starts
+                    audio.play()
+                        .then(() => {
+                            // Hide the image when audio ends
+                            audio.addEventListener('ended', () => setIsPlaying(false));
+                        })
+                        .catch(error => {
+                            console.error('Audio playback error:', error);
+                            setIsPlaying(false); // Hide the image in case of error
+                        });
                 }
             } else {
                 console.error(json.error);
@@ -48,7 +59,8 @@ const Chat = () => {
             <div className="chat-window bg-white shadow-md p-4 rounded-lg w-full max-w-3xl overflow-y-auto flex-grow">
                 <ChatWindow messages={messages} />
             </div>
-            <div className="inputbox mt-4 w-full max-w-3xl">
+            <div className="inputbox mt-4 w-full max-w-3xl relative">
+                <AudioIndicator isPlaying={isPlaying} /> {/* Include the AudioIndicator */}
                 <InputBox onSend={handleSendMessage} />
             </div>
         </div>

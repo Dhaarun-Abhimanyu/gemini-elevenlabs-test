@@ -64,3 +64,16 @@ button:hover {
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Tailwind's shadow-sm */
 }
+/* In your CSS file (e.g., styles.css) */
+
+.audio-indicator {
+  position: absolute;
+  top: -40px; /* Adjust as needed to position above the input box */
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.audio-indicator.visible {
+  opacity: 1;
+}
