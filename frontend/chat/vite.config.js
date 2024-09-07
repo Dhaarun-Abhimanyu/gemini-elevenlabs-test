@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/gemini': {
-        target: 'http://localhost:5000', // Replace with your API server
+        target: 'http://localhost:4000', // Replace with your API server
         changeOrigin: true,
       },
     },
