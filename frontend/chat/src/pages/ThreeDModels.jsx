@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ThreeDModel = () => {
   const containerRef = useRef(null);
-  const modelRef = useRef(null);
+  const modelRef = useRef(null); //go back
   const navigate = useNavigate();
   let scene, camera, renderer, model, pinModel, raycaster, mouse, hoveredSegment = null;
   let loaded = 0;
