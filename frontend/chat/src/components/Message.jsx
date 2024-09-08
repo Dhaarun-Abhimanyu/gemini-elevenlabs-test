@@ -1,9 +1,9 @@
 import React from 'react';
-
+import './styles.css'
 const Message = ({ sender, text }) => {
     return (
         <div
-            className={`message p-2 my-2 rounded-lg ${
+            className={`message ${
                 sender === 'User'
                     ? 'user-message'
                     : 'bot-message'

@@ -22,6 +22,6 @@ years.forEach((year, index) => {
     });
 
     year.addEventListener('mouseleave', () => {
-        popup.style.display = 'block';
+        popup.style.display = 'none';
     });
 });

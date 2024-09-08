@@ -6,7 +6,14 @@ const Heroes = () => {
   const navigate = useNavigate();
 
   return (
+    
     <div className="heroes-container">
+      <a className="back-button" onClick={() => navigate(-1)}>
+        ← Back
+      </a>
+      <div className="tagline">
+        "Legends who shaped history with courage and honor"
+      </div>
       <div className="gallery">
         <div className="hero" onClick={() => navigate('/south')}>
           <img src="pandiyan.png" alt="Hero 1" />

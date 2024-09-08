@@ -1,49 +1,212 @@
+.heroes-container .hero h3:hover {
+    color: inherit; /* No color change on hover */
+    letter-spacing: normal; /* No letter spacing on hover */
+}
+
+/* Add a catchy phrase above the cards in the center */
+/* Adjust the tagline to sit higher and create space between it and the cards */
+.heroes-container .tagline {
+    position: absolute;
+    top: 5%; /* Adjusted to 5% from top */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    color: #fff;
+    font-family: 'Cinzel', serif; /* Historical font */
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    letter-spacing: 2px;
+    background: rgba(0, 0, 0, 0.4); /* Slight background to make text stand out */
+    padding: 15px 30px; /* Added padding for more spacing */
+    border-radius: 10px;
+    z-index: 10; /* Ensures it stays above other elements */
+}
+
+/* Add some margin to the gallery to prevent overlap */
+.heroes-container .gallery {
+    margin-top: 150px; /* Increased margin to move the cards down */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 80%;
+}
+
 /* Scoped styles for the Heroes component */
+/* Scoped styles for the Heroes component */
+/* Adding a subtle historical parchment pattern to the background */
 .heroes-container {
+    background-image: url('parchment-pattern.png'), linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    background-size: contain, cover;
+}
+
+/* Adding an ornate border effect to hero images for a historical look */
+.heroes-container .hero img {
+    border: 5px solid rgba(255, 255, 255, 0.4);
+    border-image: url('ornate-border.png') 30 stretch; /* Ornate border effect */
+    border-radius: 10px;
+}
+
+/* Small description text under the hero name */
+.heroes-container .hero p {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #ddd;
+    font-style: italic;
+    font-weight: 300;
+}
+
+/* Changing the hero name font to something more historical */
+.heroes-container .hero h3 {
+    font-family: 'Cinzel', serif; /* Historical serif font */
+    margin-top: 10px;
+    font-size: 22px;
+    color: #fff;
+}
+
+/* Optional hover effect for extra visual feedback */
+.heroes-container .hero:hover h3 {
+    color: #eceae3; /* Historical golden color on hover */
+    letter-spacing: 2px; /* Slightly spaced for dramatic effect */
+}
+
+.heroes-container {
+    position: relative;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
     background-image: url('history-background.jpg');
     background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
 }
 
+/* Gallery grid with 3 cards per row */
 .heroes-container .gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px;
+    grid-gap: 40px;
     justify-items: center;
     align-items: center;
+    padding: 20px;
+    max-width: 80%;
 }
 
+/* Hero card with hover effects */
 .heroes-container .hero {
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .heroes-container .hero img {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .heroes-container .hero h3 {
     margin-top: 10px;
+    font-size: 20px;
     color: #fff;
-    font-size: 18px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    transition: color 0.3s ease;
 }
 
 .hero:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .hero img:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.heroes-container .hero h3:hover {
+    color: #ffd700; /* Golden color on hover */
+}
+
+/* Styled Back Button */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    background-color: #0d0d0d; /* Green background color */
+    padding: 12px 25px;
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(162, 164, 162, 0.5); /* Green shadow */
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background-color: #cbc5c5; /* Lighter green on hover */
+    box-shadow: 0 15px 30px rgba(18, 18, 18, 0.7);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Add border styling to the hero images */
+.heroes-container .hero img {
+    border: 5px solid rgba(255, 255, 255, 0.4);
+    transition: border 0.3s ease;
+}
+
+.heroes-container .hero img:hover {
+    border-color: #d9e5d9; /* Green border on hover */
+}
+
+.heroes-container .hero:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(-10px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .heroes-container .gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .heroes-container .gallery {
+        grid-template-columns: repeat(1, 1fr); /* 1 card per row on smaller screens */
+    }
+}
+
+/* Background image for the heroes section */
+/* Background image for the heroes section */
+/* Background image for the heroes section */
+.heroes-container {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-image: url('your-background-image.jpg'), linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); /* Replace 'your-background-image.jpg' with the actual path */
+    background-size: cover; /* Cover ensures the image stretches to cover the entire container */
+    background-position: center; /* Centers the background image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    backdrop-filter: blur(5px); /* Blurs the background a bit */
+    color: white;
 }

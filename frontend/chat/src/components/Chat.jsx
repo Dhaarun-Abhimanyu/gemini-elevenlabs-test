@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import ChatWindow from '../components/ChatWindow';
 import InputBox from '../components/InputBox';
-
+import './styles.css'
 const Chat = () => {
     const [messages, setMessages] = useState([]);
-
+    const[isLoading, setIsLoading] = useState(false);
     const addMessage = (text, sender, audio = null) => {
         setMessages(prevMessages => [...prevMessages, { text, sender, audio }]);
     };
@@ -12,6 +12,7 @@ const Chat = () => {
     const handleSendMessage = async (message) => {
         // Add the user's message to the chat
         addMessage(message, 'User');
+        setIsLoading(true);
         try {
             // Send the message to the backend and get the bot's response
             const response = await fetch('/gemini', {
@@ -42,6 +43,7 @@ const Chat = () => {
         } catch (error) {
             console.error('Error:', error);
         }
+        setIsLoading(false)
     };
 
     return (
@@ -50,7 +52,7 @@ const Chat = () => {
                 <ChatWindow messages={messages} />
             </div>
             <div>
-                <InputBox onSend={handleSendMessage} />
+                <InputBox onSend={handleSendMessage} isLoading={isLoading} />
             </div>
         </div>
     );
