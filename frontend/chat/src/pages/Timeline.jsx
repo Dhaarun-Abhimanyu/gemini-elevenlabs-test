@@ -12,7 +12,7 @@ const Timeline = () => {
   const timelineData = [
     { title: 'Event 1', description: 'Sai joined the meeting.', year: '1650-1700', image: "src/assets/Screenshot (6).png" ,link: 'page1'},
     { title: 'Event 2', description: 'Darshan flexing his muscules.', year: '1701-1750', image: "src/assets/Screenshot (9).png" ,link: 'page2'},
-    { title: 'Event 3', description: 'Sai admiring the beauty of Naren.', year: '1751-1800', image: "src/assets/Screenshot (12).png" ,link: 'south'},
+    { title: 'Event 3', description: 'Sai admiring the beauty of Naren.', year: '1751-1800', image: "src/assets/Screenshot (12).png" ,link: 'characters'},
     { title: 'Event 4', description: 'Beluga playing BOPZ.', year: '1801-1850', image: "src/assets/Screenshot (46).png", link: 'page4' },
     { title: 'Event 5', description: 'Communism at its peak.', year: '1851-1900', image: "src/assets/Screenshot (58).png", link: 'page5' },
   ];
