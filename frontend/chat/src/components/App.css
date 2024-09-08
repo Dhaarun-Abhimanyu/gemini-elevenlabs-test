@@ -11,10 +11,10 @@ body, html, #root {
   /* Info Box Styles */
   .info-box {
     position: fixed;
-    top: 25%;
+    top: 100px;
     left: 20vh;
-    width: 300px;
-    height: 400px;
+    max-width: 30%;
+    max-height: 90%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -128,7 +128,7 @@ body, html, #root {
     transition: background-color 0.3s ease;
   }
   
-  .back-button:hover {
+  .button:hover {
     background-color: #1e88e5;
   }
   

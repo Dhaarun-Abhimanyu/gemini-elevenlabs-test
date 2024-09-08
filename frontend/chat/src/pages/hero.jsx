@@ -8,13 +8,13 @@ const HeroesGallery = () => {
   return (
     <div className="heroes-container">
       <button className="back-button" onClick={() => navigate(-1)}>
-      ← Back</button>
+      &#8592;  Back</button>
       <div className="tagline">
         "Legends who shaped history with courage and honor"
       </div>
       <div className="gallery">
         {[
-          { id: 1, name: 'Shivaji', path: '/south', image: 'pandiyan.png' },
+          { id: 1, name: 'Shivaji', path: '/south', image: 'src/assets/pandiyan.png' },
           { id: 2, name: 'Hero 2', path: '/hero2', image: 'pandiyan.png' },
           { id: 3, name: 'Hero 3', path: '/hero3', image: 'pandiyan.png' },
           { id: 4, name: 'Hero 4', path: '/hero4', image: 'pandiyan.png' },

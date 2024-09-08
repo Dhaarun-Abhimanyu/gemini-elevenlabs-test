@@ -10,11 +10,11 @@ const Timeline = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const timelineData = [
-    { title: 'Event 1', description: 'Sai joined the meeting.', year: '1650-1700', image: "src/assets/Screenshot (6).png" ,link: 'page1'},
-    { title: 'Event 2', description: 'Darshan flexing his muscules.', year: '1701-1750', image: "src/assets/Screenshot (9).png" ,link: 'page2'},
-    { title: 'Event 3', description: 'Sai admiring the beauty of Naren.', year: '1751-1800', image: "src/assets/Screenshot (12).png" ,link: 'characters'},
-    { title: 'Event 4', description: 'Beluga playing BOPZ.', year: '1801-1850', image: "src/assets/Screenshot (46).png", link: 'page4' },
-    { title: 'Event 5', description: 'Communism at its peak.', year: '1851-1900', image: "src/assets/Screenshot (58).png", link: 'page5' },
+    { title1: 'Event 1',description1: 'Sai joined the meeting.',title2:'hello', description2: 'Sai joined the meeting.',title3:'hello', description3: 'Sai joined the meeting.', year: '1650-1700', image: "src/assets/1650-1700.png" ,link: 'page1'},
+    { title1: 'Event 1',description1: 'Sai joined the meeting.',title2:'hello', description2: 'Sai joined the meeting.',title3:'hello', description3: 'Sai joined the meeting.', year: '1700-1750', image: "src/assets/1650-1700.png" ,link: 'page3'},
+    { title1: 'Event 1',description1: 'Sai joined the meeting.',title2:'hello', description2: 'Sai joined the meeting.',title3:'hello', description3: 'Sai joined the meeting.', year: '1750-1800', image: "src/assets/1650-1700.png" ,link: 'characters'},
+    { title1: 'Event 1',description1: 'Sai joined the meeting.',title2:'hello', description2: 'Sai joined the meeting.',title3:'hello', description3: 'Sai joined the meeting.', year: '1800-1850', image: "src/assets/1650-1700.png" ,link: 'page1'},
+    { title1: 'Event 1',description1: 'Sai joined the meeting.',title2:'hello', description2: 'Sai joined the meeting.',title3:'hello', description3: 'Sai joined the meeting.', year: '1850-1900', image: "src/assets/1650-1700.png" ,link: 'page1'},
   ];
 
   // This function now appends the path to the home route '/'
@@ -34,11 +34,11 @@ const Timeline = () => {
 
   const infoBoxStyles = {
     position: 'fixed',
-    left: hoveredIndex !== null && hoveredIndex % 2 === 0 ? '200px' : 'auto',
-    right: hoveredIndex !== null && hoveredIndex % 2 !== 0 ? '200px' : 'auto',
-    width: '300px',
-    height: '400px',
-    padding: '20px',
+    left: hoveredIndex !== null && hoveredIndex % 2 === 0 ? '40px' : 'auto',
+    right: hoveredIndex !== null && hoveredIndex % 2 !== 0 ? '40px' : 'auto',
+    width: '50%',
+    height: '70%',
+    padding: '10px',
     border: '1px solid #ccc',
     borderRadius: '20px',
     backgroundColor: 'white',
@@ -51,7 +51,7 @@ const Timeline = () => {
 
   return (
     <div className="timeline-container" style={{ position: 'relative' }}>
-      <button className='button'>&#8592;</button>
+      <button className='back-button' onClick={() => navigate(-1)}>&#8592; Back</button>
       <div className="timeline">
         {timelineData.map((item, index) => (
           <div className="timeline-item" key={index}>
