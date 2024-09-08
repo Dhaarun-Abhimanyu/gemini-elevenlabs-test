@@ -9,14 +9,14 @@ const InfoBox = ({ item, style }) => {
         <img src={image} alt={title1} className="info-box-image" />
         <div className="info-box-text">
           <br />
-          <h2>{title1}</h2>
+          <h3>{title1}</h3>
           <p>{description1}</p>
           <br />
-          <h2>{title2}</h2>
-          <p>{description1}</p>
+          <h3>{title2}</h3>
+          <p>{description2}</p>
           <br />
-          <h2>{title1}</h2>
-          <p>{description1}</p>
+          <h3>{title3}</h3>
+          <p>{description3}</p>
         </div>
       </div>
     </div>
