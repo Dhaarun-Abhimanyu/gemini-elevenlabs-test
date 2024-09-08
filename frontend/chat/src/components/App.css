@@ -1,0 +1,137 @@
+/* General Styles */
+body, html, #root {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: rgb(5, 5, 5);
+  }
+  
+  /* Info Box Styles */
+  /* Info Box Styles */
+  .info-box {
+    position: fixed;
+    top: 25%;
+    left: 20vh;
+    width: 300px;
+    height: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 1s ease, transform 0.5s ease;
+    transform: translateY(-20px) scale(0.95);
+    display: flex;
+  }
+  
+  .info-box.visible{
+    opacity: 1; /* Fully visible */
+    transform: translateY(0) scale(1);
+  }
+  
+  .info-box img {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 20px; /* Only round the left side corners */
+  }
+  
+  .info-box .info-content {
+    padding: 20px;
+    width: 70%;
+  }
+  
+  .info-box .info-content h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .info-box .info-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Timeline Container Styles */
+  .timeline-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  /* Timeline Line Styles */
+  .timeline {
+    position: relative;
+    width: 2px;
+    background-color: #2196F3;
+    height: 150vh;
+  }
+  
+  /* Timeline Item Styles */
+  .timeline-item {
+    position: relative;
+    height: 30vh; /* Fixed height to ensure vertical spacing */
+  
+  }
+  
+  /* Circle Styles */
+  .circle {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 2px solid #f8f7fc;
+    border-radius: 50%;
+    position: absolute;
+    left: -0.7vw;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+  }
+  
+  /* Hover Effect for Circle */
+  .circle:hover {
+    background-color: #0704da;
+  }
+  
+  .year-text {
+    position: fixed;
+    display: block;
+    font-size: 10px;
+    font-weight: bold;
+    opacity: 1; /* Initially hidden */
+   /* transform: scale(0);  Scale down initially 
+    //transition: transform 0.4s ease, opacity 0.4s ease; /* Smooth transitions */
+  }
+  
+  .year-text.show {
+    opacity: 1; /* Make visible */
+   /* transform: scale(1); Scale up to full size */
+  }
+  
+  .button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #1e88e5;
+  }
+  
+  .page1{
+    color: red;
+  }

@@ -2,7 +2,9 @@
   "name": "history-revealed",
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend/chat && npm start\""
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend/chat && npm start\"",
+    "install": "cd backend && npm install && cd ../frontend/chat && npm install"
+  
   },
   "devDependencies": {
     "concurrently": "^6.2.1"

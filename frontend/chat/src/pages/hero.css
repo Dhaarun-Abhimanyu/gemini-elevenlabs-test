@@ -1,3 +1,11 @@
+/* General body styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Keep the hero name text color constant on hover */
 .heroes-container .hero h3:hover {
     color: inherit; /* No color change on hover */
     letter-spacing: normal; /* No letter spacing on hover */
@@ -151,7 +159,7 @@
     color: white;
     background-color: #0d0d0d; /* Green background color */
     padding: 12px 25px;
-    border-radius: 50px;
+    border-radius: 10px;
     box-shadow: 0 10px 20px rgba(162, 164, 162, 0.5); /* Green shadow */
     backdrop-filter: blur(5px);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -159,8 +167,8 @@
 }
 
 .back-button:hover {
-    background-color: #cbc5c5; /* Lighter green on hover */
-    box-shadow: 0 15px 30px rgba(18, 18, 18, 0.7);
+    background-color: #000000; /* Lighter green on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
     transform: scale(1.1);
     cursor: pointer;
 }
@@ -200,7 +208,7 @@
     position: relative;
     margin: 0;
     padding: 0;
-    background-image: url('your-background-image.jpg'), linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); /* Replace 'your-background-image.jpg' with the actual path */
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); /* Replace 'your-background-image.jpg' with the actual path */
     background-size: cover; /* Cover ensures the image stretches to cover the entire container */
     background-position: center; /* Centers the background image */
     display: flex;

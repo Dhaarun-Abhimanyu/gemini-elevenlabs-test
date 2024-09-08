@@ -34,16 +34,43 @@ body, html {
     padding: 10px;
 }
 
-/* Chat window */
 .chat-window {
-    background-color:rgb(246, 246, 246,0) ;
+    background-color: rgba(246, 246, 246, 0); /* Transparent background */
     flex-grow: 1;
     max-height: 100%;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
 
     display: flex;
     flex-direction: column;
-    padding: 5px; 
+    padding: 5px;
+
+    /* Custom scrollbar */
+    scrollbar-width: thin; /* Firefox support for thin scrollbar */
+    scrollbar-color: #666a6e rgba(0, 0, 0, 0.1); /* Firefox: scrollbar colors */
+}
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+.chat-window::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.chat-window::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Track color */
+    border-radius: px; /* Rounded scrollbar track */
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+    background-color: #2e3236; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded thumb for smoother design */
+    border: 2px solid rgba(0, 0, 0, 0.1); /* Optional border around the thumb for a 3D effect */
+}
+
+.chat-window::-webkit-scrollbar-thumb:hover {
+    background-color: #71777d; /* Darker color when hovered */
+}
+
+.chat-window::-webkit-scrollbar-thumb:active {
+    background-color: #989fa7; /* Even darker when active (clicked) */
 }
 
 /* Individual messages */
@@ -74,7 +101,7 @@ body, html {
     padding: 5px;            /* Padding for spacing */
     width: 100%;             /* Full width of the container */
     max-width: 600px;        /* Optional: Max width for the input box */
-    background-color: rgba(227, 222, 222, 0.7);  /* White background for the input box */
+    background-color: rgba(255, 255, 255,0.9);  /* White background for the input box */
 }
 
 .input-box {
@@ -92,7 +119,7 @@ body, html {
     display: flex;           /* Center the button contents */
     justify-content: center;
     align-items: center;
-    background-color: rgb(0, 0, 0,0); /* Button color */
+    background-color: rgba(181, 173, 173, 0); /* Button color */
     border: none;            /* Remove border */
     border-radius: 40%;      /* Rounded corners */
     padding: 10px;           /* Padding inside the button */

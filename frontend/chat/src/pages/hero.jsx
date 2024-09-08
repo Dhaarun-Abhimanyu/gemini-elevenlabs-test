@@ -1,47 +1,34 @@
 import React from 'react';
-import './hero.css'; // Ensure this path is correct relative to your project structure
-import { useNavigate } from 'react-router-dom'; // For navigation
+import { useNavigate } from 'react-router-dom';
+import './hero.css';  // Make sure to create and import your CSS file
 
-const Heroes = () => {
+const HeroesGallery = () => {
   const navigate = useNavigate();
 
   return (
-    
     <div className="heroes-container">
-      <a className="back-button" onClick={() => navigate(-1)}>
-        ← Back
-      </a>
+      <button className="back-button" onClick={() => navigate(-1)}>
+      ← Back</button>
       <div className="tagline">
         "Legends who shaped history with courage and honor"
       </div>
       <div className="gallery">
-        <div className="hero" onClick={() => navigate('/south')}>
-          <img src="pandiyan.png" alt="Hero 1" />
-          <h3>Shivaji</h3>
-        </div>
-        <div className="hero" onClick={() => navigate('/hero2')}>
-          <img src="pandiyan.png" alt="Hero 2" />
-          <h3>Hero 2</h3>
-        </div>
-        <div className="hero" onClick={() => navigate('/hero3')}>
-          <img src="pandiyan.png" alt="Hero 3" />
-          <h3>Hero 3</h3>
-        </div>
-        <div className="hero" onClick={() => navigate('/hero4')}>
-          <img src="pandiyan.png" alt="Hero 4" />
-          <h3>Hero 4</h3>
-        </div>
-        <div className="hero" onClick={() => navigate('/hero5')}>
-          <img src="pandiyan.png" alt="Hero 5" />
-          <h3>Hero 5</h3>
-        </div>
-        <div className="hero" onClick={() => navigate('/hero6')}>
-          <img src="pandiyan.png" alt="Hero 6" />
-          <h3>Hero 6</h3>
-        </div>
+        {[
+          { id: 1, name: 'Shivaji', path: '/south', image: 'pandiyan.png' },
+          { id: 2, name: 'Hero 2', path: '/hero2', image: 'pandiyan.png' },
+          { id: 3, name: 'Hero 3', path: '/hero3', image: 'pandiyan.png' },
+          { id: 4, name: 'Hero 4', path: '/hero4', image: 'pandiyan.png' },
+          { id: 5, name: 'Hero 5', path: '/hero5', image: 'pandiyan.png' },
+          { id: 6, name: 'Hero 6', path: '/hero6', image: 'pandiyan.png' }
+        ].map(hero => (
+          <div className="hero" key={hero.id} onClick={() => navigate(hero.path)}>
+            <img src={hero.image} alt={hero.name} />
+            <h3>{hero.name}</h3>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default Heroes;
+export default HeroesGallery;

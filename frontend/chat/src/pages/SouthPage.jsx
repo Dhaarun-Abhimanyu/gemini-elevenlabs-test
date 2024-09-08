@@ -24,7 +24,7 @@ const SouthPage = () => {
       <div style={{ 
         position: 'absolute', 
         top: '50%', 
-        left: '48%', 
+        left: '47.5%', 
         transform: 'translate(-50%, -50%)', 
         width: '100%', 
         maxWidth: '480px',   // Set a max-width for better scaling on large screens
