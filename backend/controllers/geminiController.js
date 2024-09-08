@@ -37,7 +37,7 @@ const generateContent = async(req,res) => {
         const response = await result.response
         const text = await response.text();
 
-        conversationHistory.push('Kattabomman: '+text)
+        conversationHistory.push(text)
         console.log(conversationHistory.join("\n"));
 
         const audioBase64 = await generateGeminiAudio(text);
