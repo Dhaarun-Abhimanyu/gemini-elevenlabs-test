@@ -4,7 +4,7 @@ body, html, #root {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: rgb(5, 5, 5);
+    background-color: RGB(135,206,235);
   }
   
   /* Info Box Styles */
@@ -67,7 +67,7 @@ body, html, #root {
   .timeline {
     position: relative;
     width: 2px;
-    background-color: #2196F3;
+    background-color: black;
     height: 150vh;
   }
   
@@ -82,7 +82,7 @@ body, html, #root {
   .circle {
     width: 20px;
     height: 20px;
-    background-color: white;
+    background-color: rgb(5, 5, 5);
     border: 2px solid #f8f7fc;
     border-radius: 50%;
     position: absolute;
@@ -95,13 +95,13 @@ body, html, #root {
   
   /* Hover Effect for Circle */
   .circle:hover {
-    background-color: #0704da;
+    background-color: #3dc6f4;
   }
   
   .year-text {
     position: fixed;
     display: block;
-    font-size: 10px;
+    font-size: 25px;
     font-weight: bold;
     opacity: 1; /* Initially hidden */
    /* transform: scale(0);  Scale down initially 
@@ -128,9 +128,7 @@ body, html, #root {
   }
   
   .button:hover {
-    background-color: #1e88e5;
+    background-color: #6aa6d9;
   }
   
-  .page1{
-    color: red;
-  }
+  
