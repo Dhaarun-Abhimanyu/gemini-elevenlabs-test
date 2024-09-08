@@ -12,9 +12,7 @@ const Chat = () => {
     const handleSendMessage = async (message) => {
         // Add the user's message to the chat
         addMessage(message, 'User');
-        let loading = 0;
         try {
-            loading = 1;
             // Send the message to the backend and get the bot's response
             const response = await fetch('/gemini', {
                 method: 'POST',
@@ -24,7 +22,6 @@ const Chat = () => {
                 body: JSON.stringify({ text: message }),
             });
             const json = await response.json();
-            loading = 0;
             console.log('Server response:', json); // Debugging line
 
             if (response.ok) {

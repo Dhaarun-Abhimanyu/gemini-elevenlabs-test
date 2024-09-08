@@ -28,7 +28,7 @@ const SouthPage = () => {
         transform: 'translate(-50%, -50%)', 
         width: '100%', 
         maxWidth: '480px',   // Set a max-width for better scaling on large screens
-        height: '70%',       // Occupy 70% of the vertical space
+        height: '85%',
         backgroundColor: 'rgba(255, 255, 255, 0.5)',  // Slightly more opaque for readability
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',   // Subtle shadow for depth
         borderRadius: '20px',  // Smooth, rounded corners
