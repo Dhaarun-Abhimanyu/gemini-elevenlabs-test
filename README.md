@@ -16,13 +16,13 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/history-revealed.git
+git clone https://github.com/DARSHAN-V-G/gemini-elevenlabs-test.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd history-revealed
+cd gemini-elevenlabs-test
 ```
 
 3. Install the dependencies:
@@ -42,7 +42,7 @@ npm run dev
 This will start a local development server. Open your browser and visit:
 
 ```
-http://localhost:3000
+http://localhost:5173
 ```
 
 ### Project Structure
@@ -55,7 +55,7 @@ http://localhost:3000
 
 - HTML, CSS, JavaScript
 - Node.js
-- Any additional frameworks or libraries used in your project (React, Vue, etc.)
+- React(vite)
 
 ### License
 
