@@ -2,7 +2,7 @@ const { ElevenLabsClient, play} = require('elevenlabs')
 require('dotenv').config()
 
 const elevenlabs = new ElevenLabsClient({
-    apiKey:"sk_c0dad231c25ba62c0abbd71f7a52f6ee691bcf60bc124be3"
+    apiKey:"sk_54253f02b2268ee1c8313da65b6fdd67ff2a8c550fb60d0f"
 });
 
 

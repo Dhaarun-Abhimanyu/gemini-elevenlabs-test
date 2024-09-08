@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SouthPage from './pages/SouthPage'; // Corrected import
-import Chat from './pages/Chat';
 import ThreeDModels from './pages/ThreeDModels';
 
 function App() {

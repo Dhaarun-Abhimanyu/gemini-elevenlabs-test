@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import TWEEN from 'https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.esm.min.js';
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/jsm/loaders/GLTFLoader.js';
-
 import { useNavigate } from 'react-router-dom';  // For React Router navigation
 
 const ThreeDModel = () => {
-  const containerRef = useRef(null); // To reference the DOM container
+  const containerRef = useRef(null); 
+  const modelRef = useRef(null); // To reference the DOM container
   const navigate = useNavigate();    // For programmatic navigation
   let scene, camera, renderer, model, raycaster, mouse, hoveredSegment = null;
+  let loaded=0;
 
   useEffect(() => {
     init();
@@ -28,63 +29,66 @@ const ThreeDModel = () => {
     // Scene setup
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x87CEEB);
-
+  
     // Camera setup
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-
+  
     // Attach the renderer to the container in the DOM
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement);
     }
-
+  
     // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
     const light = new THREE.DirectionalLight(0xffffff, 1.5);
     light.position.set(2, 6, 10).normalize();
     scene.add(light);
-
-    // Load the GLTF model
-    const loader = new GLTFLoader();
-    loader.load('/PLAIN.glb', function (gltf) {
-      model = gltf.scene;
-      model.scale.set(4.4, 4.4, 4);
-      model.position.set(4, 0.9, -1);
-      model.rotation.set(13.8, 0, 0);
-      scene.add(model);
-
-      // Hide loading screen and show header after 3 seconds
-      document.getElementById('loading-screen').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        document.getElementById('header').style.display = 'flex';
-      }, 3000);
-
-      // Set initial camera position
-      camera.position.z = 20;
-      camera.position.y = 0;
-      camera.position.x = 100;
-
-      // Tween to zoom in
-      new TWEEN.Tween(camera.position)
-        .to({ x: 0, y: 0, z: 15 }, 2000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
-
-      // Start the animation loop
-      animate();
-    }, undefined, function (error) {
-      console.error('An error happened while loading the model:', error);
-    });
-
+  
+    // Check if the model is already loaded
+    console.log("im going to load and fuck dhaaun at the same time", loaded);
+    if (loaded==0) {
+      loaded=1;
+      const loader = new GLTFLoader();
+      loader.load('/PLAIN.glb', function (gltf) {
+        console.log("loaded da punda")
+        model = gltf.scene; // Store the model reference
+        model.scale.set(4.4, 4.4, 4);
+        model.position.set(4, 0.9, -1);
+        model.rotation.set(13.8, 0, 0);
+        scene.add(model);
+  
+        // Hide loading screen and show header after 3 seconds
+        document.getElementById('loading-screen').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('loading-screen').style.display = 'none';
+          document.getElementById('header').style.display = 'flex';
+        }, 3000);
+  
+        // Set initial camera position and start animation
+        camera.position.set(100, 0, 20);
+  
+        // Tween to zoom in
+        new TWEEN.Tween(camera.position)
+          .to({ x: 0, y: 0, z: 15 }, 2000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
+  
+        // Start the animation loop
+        animate();
+      }, undefined, function (error) {
+        console.error('An error occurred while loading the model:', error);
+      });
+    } 
+  
     camera.position.z = 20;
-
+  
     // Raycaster for mouse interactions
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
-
+  
     // Event listeners
     window.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('click', onDocumentClick, false);
