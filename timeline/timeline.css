@@ -1,0 +1,120 @@
+/* Style for the container */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: radial-gradient(circle at right bottom, #cabda6 0%, #6e6fab 100%); /* Radial gradient background */
+    overflow: hidden; /* Prevent overflow */
+    position: relative; /* Use relative positioning */
+    width: 100%;
+    height: 100%;
+}
+
+
+.timeline-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 50px;
+}
+
+/* Style for the vertical timeline */
+.timeline {
+    position: relative;
+    align-self: centre;
+    width: 4px;
+    height: 2000px; /* Adjust according to content length */
+    background-color: #1900ff; /* Color of the timeline */
+    
+    margin: 0 auto;
+}
+
+.year {
+    position: absolute;
+    left: -100px; /* Adjust this to make space for the horizontal line */
+    width: 100px;
+    text-align: left;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+}
+
+
+
+/* Horizontal line style */
+.year:nth-child(even)::after {
+    content: "";
+    position: absolute;
+    top: 50%; /* Aligns the horizontal line in the middle of the text */
+    right: 50px; /* Adjust according to the position of the timeline */
+    width: 50px; /* Length of the horizontal line */
+    height: 2px;
+    background-color: #0033ff; /* Same color as the timeline */
+}
+
+.year:nth-child(odd)::after {
+    content: "";
+    position: absolute;
+    top: 50%; /* Aligns the horizontal line in the middle of the text */
+    left : 50px;/* Adjust according to the position of the timeline */
+    width: 50px; /* Length of the horizontal line */
+    height: 2px;
+    background-color: #0033ff; /* Same color as the timeline */
+}
+
+.year:nth-child(even) {
+    left : 1px;
+    text-align: right; /* Example style for even years */
+  }
+  
+  .year:nth-child(odd) {
+    text-align: left; /* Example style for odd years */
+  }
+
+/* Position each year */
+.year:nth-child(1) { top: 0px; }
+.year:nth-child(2) { top: 100px;  }
+.year:nth-child(3) { top: 200px; }
+.year:nth-child(4) { top: 270px; }
+.year:nth-child(5) { top: 400px; }
+.year:nth-child(6) { top: 500px;  }
+.year:nth-child(7) { top: 600px; }
+.year:nth-child(8) { top: 700px;  }
+.year:nth-child(9) { top: 800px;  }
+.year:nth-child(10) { top: 900px;  }
+.year:nth-child(11) { top: 1000px; }
+.year:nth-child(12) { top: 1100px;  }
+.year:nth-child(13) { top: 1200px;  }
+.year:nth-child(14) { top: 1300px;  }
+.year:nth-child(15) { top: 1400px;  }
+.year:nth-child(16) { top: 1500px;  }
+.year:nth-child(17) { top: 1600px;  }
+.year:nth-child(18) { top: 1700px;  }
+.year:nth-child(19) { top: 1800px;  }
+.year:nth-child(20) { top: 1900px;  }
+.year:nth-child(21) { top: 2000px;   }
+
+.year:hover {
+    color: #3643d9ca;
+    text-decoration: underline;
+}
+
+.year {
+    font-family: "Edu AU VIC WA NT Hand", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    color: antiquewhite;
+  }
+
+/* Popup styling */
+.popup {
+    position: absolute;
+    background: linear-gradient(to bottom, #a3adcb,  #6e6fab); /* Gradient background */
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    z-index: 100;
+    box-shadow:black;
+}

@@ -9,7 +9,7 @@ const ThreeDModel = () => {
   const containerRef = useRef(null); // To reference the DOM container
   const navigate = useNavigate();    // For programmatic navigation
   let scene, camera, renderer, model, raycaster, mouse, hoveredSegment = null;
-
+  let loaded =0;
   useEffect(() => {
     init();
 
@@ -45,7 +45,9 @@ const ThreeDModel = () => {
     const light = new THREE.DirectionalLight(0xffffff, 1.5);
     light.position.set(2, 6, 10).normalize();
     scene.add(light);
+    if(loaded==0){
 
+    loaded =1;
     // Load the GLTF model
     const loader = new GLTFLoader();
     loader.load('/PLAIN.glb', function (gltf) {
@@ -78,7 +80,7 @@ const ThreeDModel = () => {
     }, undefined, function (error) {
       console.error('An error happened while loading the model:', error);
     });
-
+  }
     camera.position.z = 20;
 
     // Raycaster for mouse interactions
@@ -216,7 +218,7 @@ const ThreeDModel = () => {
               navigate('/east'); // Route to '/east'
               break;
             case '5':
-              navigate('/south'); // Route to '/south'
+              navigate('/characters'); // Route to '/south'
               break;
             case '6':
               navigate('/northeast'); // Route to '/northeast'

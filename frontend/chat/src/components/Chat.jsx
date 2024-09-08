@@ -12,8 +12,9 @@ const Chat = () => {
     const handleSendMessage = async (message) => {
         // Add the user's message to the chat
         addMessage(message, 'User');
-
+        let loading = 0;
         try {
+            loading = 1;
             // Send the message to the backend and get the bot's response
             const response = await fetch('/gemini', {
                 method: 'POST',
@@ -23,7 +24,7 @@ const Chat = () => {
                 body: JSON.stringify({ text: message }),
             });
             const json = await response.json();
-
+            loading = 0;
             console.log('Server response:', json); // Debugging line
 
             if (response.ok) {
@@ -47,11 +48,11 @@ const Chat = () => {
     };
 
     return (
-        <div className="chatpage flex flex-col items-center justify-center h-screen bg-gray-100">
-            <div className="chat-window bg-white shadow-md p-4 rounded-lg w-full max-w-3xl overflow-y-auto flex-grow">
+        <div className="chat-container">
+            <div className="chat-box">
                 <ChatWindow messages={messages} />
             </div>
-            <div className="inputbox mt-4 w-full max-w-3xl relative">
+            <div>
                 <InputBox onSend={handleSendMessage} />
             </div>
         </div>

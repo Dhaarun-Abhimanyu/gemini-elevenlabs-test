@@ -5,8 +5,8 @@ const Message = ({ sender, text }) => {
         <div
             className={`message p-2 my-2 rounded-lg ${
                 sender === 'User'
-                    ? 'bg-blue-500 text-white self-end'
-                    : 'bg-gray-300 text-black self-start'
+                    ? 'user-message'
+                    : 'bot-message'
             }`}
         >
             <strong>{sender}:</strong> {text}

@@ -1,8 +1,10 @@
 import { useState } from 'react';
-
+import handleSendMessage from './Chat'
 const InputBox = ({ onSend }) => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState(null);
+
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,7 +21,7 @@ const InputBox = ({ onSend }) => {
 
     return (
         <form 
-            className="input-box flex items-center p-2 bg-white border-t border-gray-200 shadow-md"
+            className="input-field "
             onSubmit={handleSubmit}
         >
             <input
@@ -27,15 +29,15 @@ const InputBox = ({ onSend }) => {
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
                 placeholder="Enter your prompt here..."
-                className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-box"
             />
             <button
                 type="submit"
-                className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="send-button"
             >
-                Send
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/></svg>
             </button>
-            {error && <div className="error text-red-500 mt-2">{error}</div>}
+            {error && <div className="error">{error}</div>}
         </form>
     );    
 };

@@ -10,6 +10,7 @@ const ThreeDScene = () => {
   // Variables for scene, camera, renderer, and mixers
   let scene, camera, renderer, planeModel;
   let mixers = [];
+  let loaded =0;
   const delayBetweenModels = 500; // Delay between each model's appearance in milliseconds
 
   useEffect(() => {
@@ -36,8 +37,9 @@ const ThreeDScene = () => {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(5, 10, 7.5);
     scene.add(directionalLight);
-
+    if(loaded==0){
     // Load the plane model
+    loaded=1;
     const loader = new GLTFLoader();
     loader.load('plane.glb', function (gltf) {
       planeModel = gltf.scene;
@@ -49,7 +51,7 @@ const ThreeDScene = () => {
     }, undefined, function (error) {
       console.error('An error happened while loading the plane model:', error);
     });
-
+  }
     // Event listeners for window resize
     window.addEventListener('resize', onWindowResize);
 

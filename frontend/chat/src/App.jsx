@@ -1,20 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SouthPage from './pages/SouthPage'; // Corrected import
-import Chat from './pages/Chat';
+import SouthPage from './pages/SouthPage';
 import ThreeDModels from './pages/ThreeDModels';
-
+import Heroes from './pages/hero';
 function App() {
   return (
-    <div className="App">
       <BrowserRouter>
-        <div className="pages">
           <Routes>
             <Route path="/" element={<ThreeDModels />} />
-            <Route path="/south" element={<SouthPage />} /> {/* Corrected component name */}
+            <Route path="/south" element={<SouthPage />} />
+            <Route path="/characters" element={<Heroes/>}/>
           </Routes>
-        </div>
       </BrowserRouter>
-    </div>
   );
 }
 
