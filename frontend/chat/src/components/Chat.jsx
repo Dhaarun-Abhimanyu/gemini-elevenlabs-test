@@ -11,6 +11,7 @@ const Chat = () => {
     };
     const location = useLocation();
     const heroName = location.state.heroName;
+    const lang=location.state.lang;
     const handleSendMessage = async (message) => {
         // Add the user's message to the chat
       
@@ -23,7 +24,7 @@ const Chat = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ text: message,event : heroName }),
+                body: JSON.stringify({ text: message,event : heroName,lang:lang }),
             });
             const json = await response.json();
             console.log('Server response:', json); // Debugging line
