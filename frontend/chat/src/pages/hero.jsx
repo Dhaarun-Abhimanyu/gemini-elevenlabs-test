@@ -23,6 +23,8 @@ const HeroesGallery = () => {
           <option value="Tamil">Tamil</option>
           <option value="Telugu">Telugu</option>
           <option value="Malayalam">Malayalam</option>
+          <option value="Hindi">Hindi</option>
+          <option value="Kannadam">Kannadam</option>
         </select>
       </div>
 
