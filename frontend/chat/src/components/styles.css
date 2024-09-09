@@ -1,0 +1,150 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content:end;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color:rgba(255, 255, 255, 0);
+    padding-bottom: 10px;
+    border-radius: 20px;
+}
+
+/* Chat box */
+.chat-box {
+    background-color: rgba(198, 15, 15, 0);
+    border-radius: 10px;
+    width: 100%;
+    max-height: 89%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.chat-window {
+    background-color: rgba(246, 246, 246, 0); /* Transparent background */
+    flex-grow: 1;
+    max-height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+
+    /* Custom scrollbar */
+    scrollbar-width: thin; /* Firefox support for thin scrollbar */
+    scrollbar-color: #666a6e rgba(0, 0, 0, 0.1); /* Firefox: scrollbar colors */
+}
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+.chat-window::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.chat-window::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Track color */
+    border-radius: px; /* Rounded scrollbar track */
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+    background-color: #2e3236; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded thumb for smoother design */
+    border: 2px solid rgba(0, 0, 0, 0.1); /* Optional border around the thumb for a 3D effect */
+}
+
+.chat-window::-webkit-scrollbar-thumb:hover {
+    background-color: #71777d; /* Darker color when hovered */
+}
+
+.chat-window::-webkit-scrollbar-thumb:active {
+    background-color: #989fa7; /* Even darker when active (clicked) */
+}
+
+/* Individual messages */
+.message {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+.user-message {
+    background-color:rgba(227, 222, 222, 0.7);
+    color: rgb(0, 0, 0);
+    align-self: flex-end;
+}
+
+.bot-message {
+    background-color: rgba(244, 244, 244, 0.7);
+    color: black;
+    align-self: flex-start;
+}
+
+/* Input box */
+.contents {
+    display: flex;
+    align-items: center;  /* Center the items vertically */
+    border: 1px solid #ccc;  /* Optional: border around the input+button */
+    border-radius: 15px;      /* Rounded corners for the input box */
+    padding: 5px;            /* Padding for spacing */
+    width: 100%;             /* Full width of the container */
+    max-width: 600px;        /* Optional: Max width for the input box */
+    background-color: rgba(255, 255, 255,0.9);  /* White background for the input box */
+}
+
+.input-box {
+    background-color: rgb(0, 0, 0,0);
+    flex-grow: 1;            /* Make the input take up all available space */
+    border: none;            /* Remove default border */
+    padding: 10px;           /* Padding for input text */
+    outline: none;           /* Remove outline when focused */
+    font-size: 16px;         /* Increase font size */
+    border-radius: 8px;   
+    width : 400px;   /* Match the overall container border radius */
+}
+
+.send-button {
+    display: flex;           /* Center the button contents */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(181, 173, 173, 0); /* Button color */
+    border: none;            /* Remove border */
+    border-radius: 40%;      /* Rounded corners */
+    padding: 10px;           /* Padding inside the button */
+    margin-left: 10px;       /* Space between input and button */
+    cursor: pointer;         /* Show pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth color change on hover */
+}
+
+.send-button:hover{
+    background-color: rgb(158, 163, 163,0.5);
+}
+
+.send-button:disabled {
+    cursor: not-allowed;    /* Show disabled cursor */
+}
+
+/* Error message */
+.error {
+
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 500;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

@@ -2,18 +2,19 @@ import React, { useEffect, useRef } from 'react';
 import TWEEN from 'https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.esm.min.js';
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/jsm/loaders/GLTFLoader.js';
-
-import { useNavigate } from 'react-router-dom';  // For React Router navigation
+import { useNavigate } from 'react-router-dom';
 
 const ThreeDModel = () => {
-  const containerRef = useRef(null); // To reference the DOM container
-  const navigate = useNavigate();    // For programmatic navigation
-  let scene, camera, renderer, model, raycaster, mouse, hoveredSegment = null;
+  const containerRef = useRef(null);
+  const modelRef = useRef(null); //go back
+  const navigate = useNavigate();
+  let scene, camera, renderer, model, pinModel, raycaster, mouse, hoveredSegment = null;
+  let loaded = 0;
+  let pinnedSegment = null; // To track the currently pinned segment
 
   useEffect(() => {
     init();
 
-    // Clean up function to remove the scene on component unmount
     return () => {
       if (containerRef.current) {
         containerRef.current.removeChild(renderer.domElement);
@@ -22,70 +23,65 @@ const ThreeDModel = () => {
       window.removeEventListener('click', onDocumentClick);
       window.removeEventListener('resize', onWindowResize);
     };
-  }, []); // Empty dependency array to run the effect only once
+  }, []);
 
   const init = () => {
-    // Scene setup
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x87CEEB);
 
-    // Camera setup
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Attach the renderer to the container in the DOM
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement);
     }
 
-    // Add lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
     const light = new THREE.DirectionalLight(0xffffff, 1.5);
     light.position.set(2, 6, 10).normalize();
     scene.add(light);
 
-    // Load the GLTF model
-    const loader = new GLTFLoader();
-    loader.load('/PLAIN.glb', function (gltf) {
-      model = gltf.scene;
-      model.scale.set(4.4, 4.4, 4);
-      model.position.set(4, 0.9, -1);
-      model.rotation.set(13.8, 0, 0);
-      scene.add(model);
+    if (loaded === 0) {
+      loaded = 1;
+      const loader = new GLTFLoader();
+      loader.load('/PLAIN.glb', function (gltf) {
+        model = gltf.scene;
+        model.scale.set(4.4, 4.4, 4);
+        model.position.set(4, 0.9, -1);
+        model.rotation.set(13.8, 0, 0);
+        scene.add(model);
 
-      // Hide loading screen and show header after 3 seconds
-      document.getElementById('loading-screen').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        document.getElementById('header').style.display = 'flex';
-      }, 3000);
+        loader.load('/PIN.glb', function (gltfPin) {
+          pinModel = gltfPin.scene;
+          pinModel.visible = false;
+          pinModel.scale.set(0.5, 0.5, 0.5); // Scale down the pin
+          scene.add(pinModel);
+        });
 
-      // Set initial camera position
-      camera.position.z = 20;
-      camera.position.y = 0;
-      camera.position.x = 100;
+        document.getElementById('loading-screen').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('loading-screen').style.display = 'none';
+          document.getElementById('header').style.display = 'flex';
+        }, 3000);
 
-      // Tween to zoom in
-      new TWEEN.Tween(camera.position)
-        .to({ x: 0, y: 0, z: 15 }, 2000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+        camera.position.set(100, 0, 20);
+        new TWEEN.Tween(camera.position)
+          .to({ x: 0, y: 0, z: 15 }, 2000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
 
-      // Start the animation loop
-      animate();
-    }, undefined, function (error) {
-      console.error('An error happened while loading the model:', error);
-    });
+        animate();
+      }, undefined, function (error) {
+        console.error('An error occurred while loading the model:', error);
+      });
+    }
 
     camera.position.z = 20;
-
-    // Raycaster for mouse interactions
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
 
-    // Event listeners
     window.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('click', onDocumentClick, false);
     window.addEventListener('resize', onWindowResize, false);
@@ -177,54 +173,95 @@ const ThreeDModel = () => {
     event.preventDefault();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
+  
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
-
+  
     if (intersects.length > 0) {
       const clickedObject = intersects[0].object;
-
+  
       if (["1", "2", "3", "4", "5", "6"].includes(clickedObject.name)) {
-        const clickedPosition = new THREE.Vector3().setFromMatrixPosition(clickedObject.matrixWorld);
-        const direction = new THREE.Vector3().subVectors(camera.position, clickedPosition).normalize();
-        const targetPosition = clickedPosition.add(direction.multiplyScalar(2)); // Adjust the scalar for zoom level
+        if (!pinnedSegment) {
+          // First click: Pin the segment with the pin model
+          pinnedSegment = clickedObject;
+  
+          // Load and position the pin model based on segment
+          const loader = new GLTFLoader();
+          loader.load('/PIN.glb', function (gltf) {
+            pinModel = gltf.scene;
+            pinModel.castShadow=true;
+            pinModel.scale.set(0.5, 0.5, 0.5);
 
-        // Tween to move the camera towards the clicked object
-        new TWEEN.Tween(camera.position)
-          .to({ x: targetPosition.x, y: targetPosition.y, z: targetPosition.z }, 1000)
-          .easing(TWEEN.Easing.Quadratic.Out)
-          .start();
-
-        new TWEEN.Tween(camera.rotation)
-          .to({ x: Math.PI / 4 }, 1000) // Adjust rotation if necessary
-          .easing(TWEEN.Easing.Quadratic.Out)
-          .start();
-
-        // Redirect after animation completes
-        new TWEEN.Tween(camera.position).to({}, 1000).onComplete(() => {
-          switch (clickedObject.name) {
-            case '1':
-              navigate('/north'); // Route to '/north'
-              break;
-            case '2':
-              navigate('/west'); // Route to '/west'
-              break;
-            case '3':
-              navigate('/central'); // Route to '/central'
-              break;
-            case '4':
-              navigate('/east'); // Route to '/east'
-              break;
-            case '5':
-              navigate('/south'); // Route to '/south'
-              break;
-            case '6':
-              navigate('/northeast'); // Route to '/northeast'
-              break;
-            default:
-              break;
-          }
-        }).start();
+  
+            // Set initial position for pin model
+            const positionMap = {
+              '1': { x: 3, y: 5.9, z:0, rotation: new THREE.Euler(1, 0, 0) },
+              '2': { x: 0, y: 2, z:1, rotation: new THREE.Euler(1, 0, 0) },
+              '3': { x: 4.5, y: 1.5, z:1.3, rotation: new THREE.Euler(1, 0, 0) },
+              '4': { x: 8.5 , y: 0, z:2, rotation: new THREE.Euler(1, 0, 0) },
+              '5': { x: 3, y: -2.8 , z:2.8, rotation: new THREE.Euler(0.6, 0, 0) },
+              '6': { x: 12, y: 3.5, z:0.5, rotation: new THREE.Euler(1, 0, 0) },
+            };
+  
+            const { x, y, z, rotation } = positionMap[clickedObject.name];
+            pinModel.position.set(x, y+10, z); // Start position above the clicked object
+            pinModel.rotation.copy(rotation);
+            scene.add(pinModel);
+  
+            // Animate the pin dropping down
+            new TWEEN.Tween(pinModel.position)
+              .to({ x: x, y: y, z: z }, 1000) // Adjust duration as needed
+              .easing(TWEEN.Easing.Bounce.Out)
+              .start();
+          });
+        } else if (pinnedSegment === clickedObject) {
+          // Second click: Perform the zoom-in animation and redirect
+          const clickedPosition = new THREE.Vector3().setFromMatrixPosition(clickedObject.matrixWorld);
+          const direction = new THREE.Vector3().subVectors(camera.position, clickedPosition).normalize();
+          const targetPosition = clickedPosition.add(direction.multiplyScalar(2)); // Adjust the scalar for zoom level
+  
+          // Tween to move the camera towards the clicked object
+          new TWEEN.Tween(camera.position)
+            .to({ x: targetPosition.x, y: targetPosition.y-0.5, z: targetPosition.z }, 1000)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .start();
+  
+          new TWEEN.Tween(camera.rotation)
+            .to({ x: Math.PI / 4 }, 1000) // Adjust rotation if necessary
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .start();
+  
+          // Redirect after animation completes
+          new TWEEN.Tween(camera.position).to({}, 1000).onComplete(() => {
+            switch (clickedObject.name) {
+              case '1':
+                navigate('/north'); // Route to '/north'
+                break;
+              case '2':
+                navigate('/west'); // Route to '/west'
+                break;
+              case '3':
+                navigate('/central'); // Route to '/central'
+                break;
+              case '4':
+                navigate('/east'); // Route to '/east'
+                break;
+              case '5':
+                navigate('/timeline'); // Route to '/south'
+                break;
+              case '6':
+                navigate('/northeast'); // Route to '/northeast'
+                break;
+              default:
+                break;
+            }
+          }).start();
+        } else {
+          // If the user clicks on a different segment, update the pin model position
+          scene.remove(pinModel);
+          pinnedSegment = null;
+          onDocumentClick(event); // Retry to pin the new segment
+        }
       }
     }
   };
@@ -235,7 +272,7 @@ const ThreeDModel = () => {
       <div id="loading-screen">
         <img src="/logo.png" alt="Welcome Logo" id="loading-logo" />
       </div>
-
+  
       {/* Header */}
       <div id="header" style={{ display: 'none' }}>
         <img src="/logo.png" alt="Logo" id="header-logo" />
@@ -251,7 +288,7 @@ const ThreeDModel = () => {
           </div>
         </div>
       </div>
-
+  
       {/* Hover Texts */}
       <div id="hover-texts">
         <div className="hover-text" id="text-1">NORTH</div>
@@ -261,10 +298,13 @@ const ThreeDModel = () => {
         <div className="hover-text" id="text-5">SOUTH</div>
         <div className="hover-text" id="text-6">NORTH-EAST</div>
       </div>
-
+  
+      {/* 3D Model Container */}
+      <div ref={containerRef} className="threejs-container" />
+  
       {/* Info Container */}
       <div id="info-container"></div>
-
+  
       {/* Renderer Container */}
       <div ref={containerRef} style={{ width: '100%', height: '100vh' }} />
     </div>

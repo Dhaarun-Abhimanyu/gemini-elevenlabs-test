@@ -26,19 +26,20 @@ let conversationHistory = []
 const generateContent = async(req,res) => {
     try{
         const user_text = req.body.text
+        const user_event = req.body.event
         conversationHistory.push('User: '+user_text)
-        const prompt = `You are Veerapandiya Kattabomman.extract all information and history about him and his timeline of life and everything about his way of life character and all the things he has done from the internet and think of yourself has him, Now this is a chatbot where the user will ask quetions, related to you, your life, and the events that took place in your time
-                        Answer the user's questions as if you are Veerapandiya Kattabomman, with relevant expressions and emotions
+        const prompt = `You are ${user_event}.extract all information and history about him and his timeline of life and everything about his way of life character and all the things he has done from the internet and think of yourself has him, Now this is a chatbot where the user will ask quetions, related to you, your life, and the events that took place in your time
+                        Answer the user's questions as if you are ${user_event}, with relevant expressions and emotions
                         Please only reply in Tamil.
                         But refrain from answering questions that are totally unrelated to you or your time(reply with "I am sorry, I cannot answer that question")
                         The conversation also keeps history, which ill be attaching below
-                        Now, let's start the conversation.` + conversationHistory.join("\n")
+                        Now, let's start the conversation.`// + conversationHistory.join("\n")
         const result = await model.generateContent(prompt)
         const response = await result.response
         const text = await response.text();
-
-        conversationHistory.push('Kattabomman: '+text)
-        console.log(conversationHistory.join("\n"));
+        
+        conversationHistory.push(text)
+        console.log(user_event);
 
         const audioBase64 = await generateGeminiAudio(text);
 
