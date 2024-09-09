@@ -35,6 +35,8 @@ const generateContent = async(req,res) => {
 
         console.log(character_prompt)
 
+        console.log('language : '+user_lang)
+
         conversationHistory.push('User: '+user_text)
         const prompt = `You are ${user_event}. ${character_prompt}
                         Extract all information and history about him and his timeline of life and everything about his way of life character and all the things he has done from the internet and think of yourself has him, Now this is a chatbot where the user will ask quetions, related to you, your life, and the events that took place in your time
