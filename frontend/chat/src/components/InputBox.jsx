@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import handleSendMessage from './Chat'
+import { useLocation } from 'react-router-dom';
 const InputBox = ({ onSend, isLoading }) => {
+    const location = useLocation();
+    const heroName = location.state.heroName;
     const [message, setMessage] = useState('');
     const [error, setError] = useState(null);
 
@@ -29,7 +31,7 @@ const InputBox = ({ onSend, isLoading }) => {
                 type="text"
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
-                placeholder="Chat with Kattabomman..."
+                placeholder={`Chat with ${heroName}...`}
                 className="input-box"
                 disabled={isLoading}
             />

@@ -2,12 +2,13 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
+
     padding: 0;
 }
 
 /* Keep the hero name text color constant on hover */
 .heroes-container .hero h3:hover {
-    color: inherit; /* No color change on hover */
+    /* color: inherit; No color change on hover */
     letter-spacing: normal; /* No letter spacing on hover */
 }
 
@@ -77,7 +78,8 @@ body {
 /* Optional hover effect for extra visual feedback */
 .heroes-container .hero:hover h3 {
     color: #eceae3; /* Historical golden color on hover */
-    letter-spacing: 2px; /* Slightly spaced for dramatic effect */
+    /* letter-spacing: 2px; Slightly spaced for dramatic effect */
+    /*Just why 3 hover for h3 you little dumb ....*/
 }
 
 .heroes-container {
@@ -92,7 +94,7 @@ body {
     align-items: center;
     height: 100vh;
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: RGB(135,206,235);
     color: white;
 }
 
@@ -106,7 +108,14 @@ body {
     padding: 20px;
     max-width: 80%;
 }
-
+#header {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+  }
 /* Hero card with hover effects */
 .heroes-container .hero {
     text-align: center;
@@ -136,9 +145,10 @@ body {
     transition: color 0.3s ease;
 }
 
-.hero:hover {
-    transform: scale(1.1);
+ .hero:hover {
+    transform: scale(1.1); 
 }
+ 
 
 .hero img:hover {
     transform: scale(1.1);
@@ -208,7 +218,7 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); /* Replace 'your-background-image.jpg' with the actual path */
+    /* background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); Replace 'your-background-image.jpg' with the actual path */
     background-size: cover; /* Cover ensures the image stretches to cover the entire container */
     background-position: center; /* Centers the background image */
     display: flex;
@@ -218,3 +228,27 @@ body {
     backdrop-filter: blur(5px); /* Blurs the background a bit */
     color: white;
 }
+.dropdown-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+  }
+  
+  .language-select {
+    background-color: #1c6ea4; /* Darker blue for contrast */
+    color: white; /* White text for good readability */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded corners for a softer look */
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(28, 110, 164, 0.4); /* Adjusted shadow color to match the new background */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .language-select:hover {
+    background-color: #155a85; /* Slightly darker blue on hover for contrast */
+    box-shadow: 0 10px 25px rgba(28, 110, 164, 0.6); /* Enhance shadow on hover */
+  }
+  
