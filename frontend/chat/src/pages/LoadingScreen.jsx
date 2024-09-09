@@ -11,9 +11,9 @@ const LoadingScreen = () => {
       <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
         <div style={{ textAlign: 'center' }}>
           <p style={{ marginBottom: '10px' }}>Learn with AI</p>
-          <button 
+          <button className='unique-btn'
             onClick={() => navigate('/threedmodel')} // Navigate to 3D model page
-            style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
+           
           >
             LET'S GO!
           </button>
@@ -25,7 +25,7 @@ const LoadingScreen = () => {
             onClick={() => {
               // Add logic to redirect to a sign-up page or any other route
             }}
-            style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
+            className='unique-btn'
           >
             LET'S GO!
           </button>

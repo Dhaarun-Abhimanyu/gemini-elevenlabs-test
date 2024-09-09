@@ -7,8 +7,7 @@ const HeroesGallery = () => {
 
   return (
     <div className="heroes-container">
-      <button className="back-button" onClick={() => navigate(-1)}>
-      &#8592;  Back</button>
+   
       <div className="tagline">
         "Legends who shaped history with courage and honor"
       </div>

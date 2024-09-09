@@ -104,7 +104,6 @@ const Timeline = () => {
 
   return (
     <div className="timeline-container" style={{ position: 'relative' }}>
-      <button className='back-button' onClick={() => navigate(-1)}>&#8592; Back</button>
       <div className="timeline">
         {timelineData.map((item, index) => (
           <div className="timeline-item" key={index}>
