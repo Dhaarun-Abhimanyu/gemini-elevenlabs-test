@@ -1,4 +1,8 @@
 import React, { useEffect, useRef } from 'react';
+import { EffectComposer } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/jsm/postprocessing/UnrealBloomPass.js';
+
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/jsm/loaders/GLTFLoader.js';
 
@@ -12,76 +16,78 @@ const ThreeDScene = () => {
   const delayBetweenModels = 500; // Delay between each model's appearance in milliseconds
 
   useEffect(() => {
-    // Initialize Three.js scene, camera, and renderer
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x87CEEB); // Sky blue background
-
+    scene.background = new THREE.Color(0x87CEEB);
+  
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 8, 10);
     camera.rotation.set(0, -0.25, 0);
-
+  
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMap.enabled = true;  // Enable shadows
-
-    // Append renderer to the container ref
+    renderer.shadowMap.enabled = true;
+  
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement);
     }
-
-    // Lights - Soft ambient and hemisphere lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Softer ambient light
+  
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
-
-    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.7); // Simulate sky lighting
-    hemisphereLight.position.set(0, 20, 0);
+  
+    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 3.7);
+    hemisphereLight.position.set(10 , 10, 0.5);
     scene.add(hemisphereLight);
-
-    // Directional light with soft shadows
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    directionalLight.position.set(5, 10, 7.5);
-    directionalLight.castShadow = true;
-
-    // Configure shadow settings for softness
-    directionalLight.shadow.mapSize.width = 256;  // Higher shadow resolution for smoother shadows
+  
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 13.2);
+    directionalLight.position.set(0, 1, 0);
+    directionalLight.castShadow = false;
+  
+    directionalLight.shadow.mapSize.width = 256;
     directionalLight.shadow.mapSize.height = 256;
     directionalLight.shadow.camera.near = 0.5;
     directionalLight.shadow.camera.far = 50;
-    directionalLight.shadow.bias = -0.001; // Reduce shadow artifacts for a softer edge
-
+    directionalLight.shadow.bias = -0.001;
+  
     scene.add(directionalLight);
-
-    // Load the plane model
+  
+    // Post-processing setup
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+  
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      0.8, // intensity
+      0.4, // radius
+      0.85 // threshold
+    );
+    composer.addPass(bloomPass);
+  
     const loader = new GLTFLoader();
     loader.load('plane.glb', function (gltf) {
       planeModel = gltf.scene;
-      planeModel.position.set(10, 0, -13   );
-      planeModel.rotation.set(0,-1.8,0);
-      planeModel.scale.set(12, 12, 12); // Adjust the scale if needed
-      planeModel.receiveShadow = true;  // Allow plane to receive shadows
+      planeModel.position.set(10, 0, -13);
+      planeModel.rotation.set(0, -1.8, 0);
+      planeModel.scale.set(12, 12, 12);
+      planeModel.receiveShadow = true;
       scene.add(planeModel);
-
-      // Load and place the temple models
+  
       loadAndPlaceModels(loader);
     }, undefined, function (error) {
       console.error('An error happened while loading the plane model:', error);
     });
-
-    // Event listeners for window resize
+  
     window.addEventListener('resize', onWindowResize);
-
-    // Animate the scene
+  
     const animate = () => {
       requestAnimationFrame(animate);
-
       const delta = clock.getDelta();
       mixers.forEach((mixer) => mixer.update(delta));
-
-      renderer.render(scene, camera);
+  
+      composer.render();
     };
     animate();
-
-    // Cleanup event listeners on component unmount
+  
     return () => {
       window.removeEventListener('resize', onWindowResize);
       if (containerRef.current) {
