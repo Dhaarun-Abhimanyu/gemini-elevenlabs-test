@@ -50,6 +50,7 @@ const generateContent = async(req,res) => {
                         Please only reply in the language ${user_lang}.
                         But refrain from answering questions that are totally unrelated to you or your time(reply with "I am sorry, I cannot answer that question")
                         The conversation also keeps history, which ill be attaching below
+                        But you dont have to worry about that, just keep the conversation going(so dont add stuff like "user": or "your name", or the conversation history)
                         Now, let's start the conversation.` + conversationHistory.join("\n")
         const result = await model.generateContent(prompt)
         const response = await result.response
