@@ -6,10 +6,10 @@ const elevenlabs = new ElevenLabsClient({
 });
 
 
-const generateGeminiAudio = async (generated_text) => {
+const generateGeminiAudio = async (generated_text, voice) => {
     try {
         const audioStream = await elevenlabs.generate({
-            voice: "Arnold",
+            voice: voice,
             text: generated_text,
             model_id: "eleven_multilingual_v2",
             stream: true

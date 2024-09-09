@@ -30,6 +30,10 @@ const generateContent = async(req,res) => {
         const user_event = req.body.event
         const user_lang = req.body.lang
 
+        var voice = "Arnold"
+        if(user_event == "Velunachiyar")
+          voice = "Grace"
+
         const characterData = charactersArray.find(characterObj => characterObj.character === user_event)
         const character_prompt = characterData ? characterData.prompt : "Character not found"
 
@@ -41,6 +45,8 @@ const generateContent = async(req,res) => {
         const prompt = `You are ${user_event}. ${character_prompt}
                         Extract all information and history about him and his timeline of life and everything about his way of life character and all the things he has done from the internet and think of yourself has him, Now this is a chatbot where the user will ask quetions, related to you, your life, and the events that took place in your time
                         Answer the user's questions as if you are ${user_event}, with relevant expressions and emotions
+                        Talk lively, with the user, and make the conversation interesting. Dont forget to add some humor and sarcasm to the conversation(relecant to the character)
+                        Also, dont sound like a robot, sound like a human, with emotions and expressions
                         Please only reply in the language ${user_lang}.
                         But refrain from answering questions that are totally unrelated to you or your time(reply with "I am sorry, I cannot answer that question")
                         The conversation also keeps history, which ill be attaching below
@@ -52,7 +58,7 @@ const generateContent = async(req,res) => {
         conversationHistory.push(text)
         console.log(user_event);
 
-        const audioBase64 = await generateGeminiAudio(text);
+        const audioBase64 = await generateGeminiAudio(text, voice);
 
         res.status(200).send({
           msg: text,
