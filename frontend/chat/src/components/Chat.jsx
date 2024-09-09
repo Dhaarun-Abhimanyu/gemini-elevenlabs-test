@@ -30,7 +30,7 @@ const Chat = () => {
 
             if (response.ok) {
                 // Add the bot's response and audio to the chat
-                addMessage(json.msg, 'Kattabomman', json.audio);
+                addMessage(json.msg, `${heroName}`, json.audio);
 
                 // Play the audio if it exists
                 if (json.audio) {

@@ -235,22 +235,22 @@ const ThreeDModel = () => {
           new TWEEN.Tween(camera.position).to({}, 1000).onComplete(() => {
             switch (clickedObject.name) {
               case '1':
-                navigate('/north'); // Route to '/north'
+                navigate('/timeline'); // Route to '/north'
                 break;
               case '2':
-                navigate('/west'); // Route to '/west'
+                navigate('/timeline'); // Route to '/west'
                 break;
               case '3':
-                navigate('/central'); // Route to '/central'
+                navigate('/timeline'); // Route to '/central'
                 break;
               case '4':
-                navigate('/east'); // Route to '/east'
+                navigate('/timeline'); // Route to '/east'
                 break;
               case '5':
                 navigate('/timeline'); // Route to '/south'
                 break;
               case '6':
-                navigate('/northeast'); // Route to '/northeast'
+                navigate('/timeline'); // Route to '/northeast'
                 break;
               default:
                 break;
@@ -276,17 +276,8 @@ const ThreeDModel = () => {
       {/* Header */}
       <div id="header" style={{ display: 'none' }}>
         <img src="/logo.png" alt="Logo" id="header-logo" />
-        <div className="dropdown">
-          <button className="dropbtn">Menu</button>
-          <div className="dropdown-content">
-            <a href="#">Option 1</a>
-            <a href="#">Option 2</a>
-            <a href="#">Option 3</a>
-            <a href="#">Option 4</a>
-            <a href="#">Option 5</a>
-            <a href="#">Option 6</a>
-          </div>
-        </div>
+     
+     
       </div>
   
       {/* Hover Texts */}

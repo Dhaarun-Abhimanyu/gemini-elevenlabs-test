@@ -14,7 +14,7 @@ body, html, #root {
     top: 80px;
     left: 20vh;
     max-width: 30%;
-    max-height: 85%;
+    height: 90%;
     border: 1px solid #ccc;
     border-radius: 20px;
     background-color: white;
@@ -67,7 +67,7 @@ body, html, #root {
   .timeline {
     position: relative;
     width: 2px;
-    background-color: black;
+    background-color:RGB(235, 206, 135);/*gold: RGB(235, 206, 135) darker same :RGB(70, 130, 180) lighter same :RGB(176, 224, 230) lg:RGB(152, 251, 152) last red:RGB(240, 128, 128)*/
     height: 150vh;
   }
   
@@ -80,9 +80,9 @@ body, html, #root {
   
   /* Circle Styles */
   .circle {
-    width: 20px;
-    height: 20px;
-    background-color: rgb(5, 5, 5);
+    width: 23px;
+    height: 23px;
+    background-color: RGB(70, 130, 180);
     border: 2px solid #f8f7fc;
     border-radius: 50%;
     position: absolute;
@@ -96,6 +96,10 @@ body, html, #root {
   /* Hover Effect for Circle */
   .circle:hover {
     background-color: #3dc6f4;
+    width : 35px;
+    height :35px;
+    left :-0.999vw;
+    transition : 0.5s ease;
   }
   
   .year-text {
@@ -130,5 +134,7 @@ body, html, #root {
   .button:hover {
     background-color: #6aa6d9;
   }
+
+  
   
   
