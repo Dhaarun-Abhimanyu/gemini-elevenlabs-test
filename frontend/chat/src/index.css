@@ -187,3 +187,14 @@ canvas {
 .unique-btn {
   animation: gradientAnimation 4s ease infinite alternate;
 }
+
+
+.titillium-web-semibold {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+
+

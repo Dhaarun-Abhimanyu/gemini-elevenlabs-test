@@ -16,7 +16,7 @@ const Timeline = () => {
       "title2": "Madurai Nayak Kingdom's Decline",
       "description2": "By the late 17th century, the Madurai Nayak Kingdom declined due to internal conflicts and invasions, leading to regional instability.",
       "title3": "Mysore's Rise under Raja Wodeyar (1638-1673)",
-      "description3": "Raja Wodeyar strengthened Mysore, laying the foundation for its future power, which later clashed with the British.",
+      "description3": "Wodeyar strengthened Mysore, laying the foundation for its power, which later clashed with the British.",
       "year": "1650-1700",
       "image": "src/assets/1650-1700.png",
       "link": "page1"
@@ -58,9 +58,9 @@ const Timeline = () => {
 ,  
 {
   "title1": "The Indian Rebellion(1857-1858)",
-  "description1": "Though the 1857 uprising was mostly in North India, it led to administrative changes in South India, including the end of the East India Company and British Crown rule from 1858.",
+  "description1": "Though the 1857 uprising was mostly in North India, it led to administrative changes in South India, including the end East India Company and British Crown rule.",
   "title2": "Formation of Indian National Congress (1885)",
-  "description2": "The Indian National Congress, formed in 1885, saw significant involvement from South Indian leaders and became a hub for political and reformist activities in Madras.",
+  "description2": "The Indian National Congress, formed in 1885, saw significant involvement from South Indian leaders and became a hub for political activities in Madras.",
   "title3": "Formation of Madras Mahajana Sabha (1884)",
   "description3": "The Madras Mahajana Sabha, founded in 1884, was an early political organization that opposed British policies and laid the foundation for the Indian National Congress.",
   "year": "1850-1900",
@@ -105,6 +105,9 @@ const Timeline = () => {
 
   return (
     <div className="timeline-container" style={{ position: 'relative' }}>
+         <div id="header" >
+        <img src="/logo.png" alt="Logo" id="header-logo" />
+      </div>
       <div className="timeline">
         {timelineData.map((item, index) => (
           <div className="timeline-item" key={index}>

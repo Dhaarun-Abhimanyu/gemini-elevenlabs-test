@@ -10,7 +10,7 @@ const LoadingScreen = () => {
       
       <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ marginBottom: '10px' }}>Learn with AI</p>
+          <p className="titillium-web-semibold" style={{ marginBottom: '10px' }}>Learn with AI</p>
           <button className='unique-btn'
             onClick={() => navigate('/threedmodel')} // Navigate to 3D model page
            
@@ -20,7 +20,7 @@ const LoadingScreen = () => {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <p style={{ marginBottom: '10px' }}>Sign up for lessons</p>
+          <p className="titillium-web-semibold" style={{ marginBottom: '10px' }}>Sign up for lessons</p>
           <button 
             onClick={() => {
               // Add logic to redirect to a sign-up page or any other route

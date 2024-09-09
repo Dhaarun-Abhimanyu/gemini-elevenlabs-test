@@ -108,7 +108,14 @@ body {
     padding: 20px;
     max-width: 80%;
 }
-
+#header {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+  }
 /* Hero card with hover effects */
 .heroes-container .hero {
     text-align: center;
@@ -221,3 +228,27 @@ body {
     backdrop-filter: blur(5px); /* Blurs the background a bit */
     color: white;
 }
+.dropdown-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+  }
+  
+  .language-select {
+    background-color: #1c6ea4; /* Darker blue for contrast */
+    color: white; /* White text for good readability */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px; /* Slightly more rounded corners for a softer look */
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(28, 110, 164, 0.4); /* Adjusted shadow color to match the new background */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .language-select:hover {
+    background-color: #155a85; /* Slightly darker blue on hover for contrast */
+    box-shadow: 0 10px 25px rgba(28, 110, 164, 0.6); /* Enhance shadow on hover */
+  }
+  
