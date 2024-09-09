@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import ChatWindow from '../components/ChatWindow';
 import InputBox from '../components/InputBox';
-import './styles.css'
+import './styles.css';
+import { useLocation } from 'react-router-dom';
 const Chat = () => {
     const [messages, setMessages] = useState([]);
     const[isLoading, setIsLoading] = useState(false);
     const addMessage = (text, sender, audio = null) => {
         setMessages(prevMessages => [...prevMessages, { text, sender, audio }]);
     };
-
+    const location = useLocation();
+    const heroName = location.state.heroName;
     const handleSendMessage = async (message) => {
         // Add the user's message to the chat
+      
         addMessage(message, 'User');
         setIsLoading(true);
         try {
@@ -20,7 +23,7 @@ const Chat = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ text: message }),
+                body: JSON.stringify({ text: message,event : heroName }),
             });
             const json = await response.json();
             console.log('Server response:', json); // Debugging line

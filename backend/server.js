@@ -3,7 +3,6 @@ const app = express()
 require('dotenv').config()
 const gemini_route = require('./routes/geminiRoute.js')
 const elevenlabs_route = require('./routes/elevenlabsRoute.js')
-
 app.use(express.json())
 
 app.use('/gemini', gemini_route)
